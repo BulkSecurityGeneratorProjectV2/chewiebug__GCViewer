@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.RandomAccessFile;
+import java.nio.file.Files;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -16,7 +17,7 @@ public class TestGCResource {
 
     @Test
     public void hasUnderlyingResourceChanged() throws Exception {
-        File testFile = File.createTempFile("GCResourceUnittest", ".txt");
+        File testFile = Files.createTempFile("GCResourceUnittest", ".txt").toFile();
         try {
             try (RandomAccessFile file = new RandomAccessFile(testFile, "rws")) {
                 GCResource resource = new GcResourceFile(testFile.getAbsolutePath());
